@@ -1,0 +1,23 @@
+{% extends "products/base.html" %}
+{% block content %}
+    <style>
+        label{
+            min-width: 100px;
+        }
+        input{
+            margin-bottom: 10px
+        }
+    </style>
+    <div class = "container mb-5 mt-5">
+        <div class="address-list-container">
+            <h4 class="text-center text-decoration-underline mb-4">Add address</h4>
+            <form method = "post">
+                {% csrf_token %}
+                {{form.as_p}}
+                <div style = "text-align: center;">
+                    <button class="btn btn-success" type = "submit">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock content %}

@@ -1,0 +1,45 @@
+{% extends "products/base.html" %}
+{% block content %}
+<style>
+    td{
+        white-space: nowrap;
+    }
+</style>
+    <div class = "container mb-5 mt-5">
+        {% if orders|length %}
+            <div class="cart-container">
+                <table class="table" style = "overflow-y: auto;">
+                    <thead>
+                        <tr>
+                            <th scope="col">Images</th>
+                            <th scope="col">Product</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in orders %}
+                            <tr>
+                                <td>
+                                    <img class = "cart-img" src = "{{order.color.main_image.image.url}}" />
+                                </td>
+                                <td>{{order.product.title}}</td>
+                                <td>₹ {{order.price}}</td>
+                                <td>{{order.count}}</td>
+                                <td>{{order.date|date:"d-M-Y" }}</td>
+                                <td>{{order.status}}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <h3 class = "text-secondary text-center">No order history</h3>
+            <div class = "text-center">
+                <a href="/" class = "btn btn-success">Buy products</a>
+            </div>
+        {% endif %}
+    </div>
+{% endblock content %}

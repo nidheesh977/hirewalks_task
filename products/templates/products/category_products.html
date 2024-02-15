@@ -1,0 +1,40 @@
+{% extends "products/base.html" %}
+
+{% block content %}
+    <div class = "container mb-5">
+        <div style = "width: 300px; margin-left: auto; margin-top: 10px; margin-bottom: 10px">
+            <form class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="Search category" aria-label="Search" name = "search">
+                <button class="btn btn-primary" type="submit">Search</button>
+            </form>
+        </div>
+        <h2>{{category_title}}</h2>
+        <div class="row">
+
+            {% if products|length %}
+                {% for product in products %}
+                    <div class = "col-3">
+                        <div class="card">
+                            <a href = "{% url 'products:product_landing' product.id product.colors.all.first.id %}">
+                                <img src="{{product.colors.all.first.main_image.image.url}}" class="card-img-top" alt="">
+                            </a>
+                            <div class="card-body">
+                                <h5 class="card-title">{{product.title}}</h5>
+                                <div class = "d-flex" style = "gap:10px">
+                                    {% for color in product.colors.all %}
+                                        <div class = "color-round" style = "background-color: {{color.color}}"></div>
+                                    {% endfor %}
+                                </div>
+                                <p class = "mb-0 text-success fw-bold">₹{{product.price}}</p>
+                                <p class = "mb-2">{{product.description}}</p>
+                                <a href="{% url 'products:product_landing' product.id product.colors.all.first.id %}" class="btn btn-primary">View product</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <h3 class = "text-secondary text-center">No products based on search</h3>
+            {% endif %}
+        </div>
+    </div>
+{% endblock content %}

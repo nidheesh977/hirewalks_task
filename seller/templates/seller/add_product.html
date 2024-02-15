@@ -1,0 +1,11 @@
+{% extends "products/base.html" %}
+{% block content %}
+    <div class="container mt-3 mb-3">
+        <h3>Add product</h3>
+        <form>
+            {% product_form.as_p %}
+            {% color_form.as_p %}
+            <button class="btn btn-success">Add</button>
+        </form>
+    </div>
+{% endblock content %}

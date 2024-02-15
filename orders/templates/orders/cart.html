@@ -1,0 +1,61 @@
+{% extends "products/base.html" %}
+{% block content %}
+    <div class = "container mb-5 mt-5">
+        {% if carts|length %}
+            <div class="cart-container">
+                <table class="table" style = "overflow-y: auto;">
+                    <thead>
+                        <tr>
+                            <th scope="col">Images</th>
+                            <th scope="col">Product</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for cart in carts %}
+                            <tr>
+                                <td>
+                                    <img class = "cart-img" src = "{{cart.color.main_image.image.url}}" />
+                                </td>
+                                <td>{{cart.product.title}}</td>
+                                <td>₹ {{cart.total_price}}</td>
+                                <td>
+                                    <div class = "d-inline-flex gap-2">
+                                        <form method = "post">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="action" value = "minus">
+                                            <input type="hidden" name="cart_id" value = "{{cart.id}}">
+                                            <button class="btn btn-sm btn-warning">-</button>
+                                        </form> 
+                                        {{cart.count}} 
+                                        <form method = "post">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="action" value = "add">
+                                            <input type="hidden" name="cart_id" value = "{{cart.id}}">
+                                            <button class="btn btn-sm btn-warning">+</button>
+                                        </form>
+                                    </div>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <th>Total</th>
+                            <td>₹ {{cart_total}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                    <div style = "text-align: right;">
+                        <a href = "{% url 'orders:add_address' %}" class="btn btn-success px-5">Checkout</a>
+                    </div>
+            </div>
+        {% else %}
+            <h3 class = "text-secondary text-center">No products in the cart</h3>
+            <div class = "text-center">
+                <a href="/" class = "btn btn-success">Add products</a>
+            </div>
+        {% endif %}
+    </div>
+{% endblock content %}
