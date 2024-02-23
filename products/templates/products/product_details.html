@@ -60,17 +60,14 @@
 {% block script %}
 <script>
     function selectSubImg(id, img){
-
         let sub_imgs = document.getElementsByClassName("landing-sub-img-active")
         for (i = 0; i < sub_imgs.length; i++){
             sub_imgs[i].classList.add("landing-sub-img")
             sub_imgs[i].classList.remove("landing-sub-img-active")
         }
-
         document.getElementById(id).classList.remove("landing-sub-img")
         document.getElementById(id).classList.add("landing-sub-img-active")
         document.getElementById("main-img").src = img
-
     }
 </script>
 {% endblock script %}
