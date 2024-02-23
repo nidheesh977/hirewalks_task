@@ -20,4 +20,4 @@ class AddressForm(ModelForm):
 class SignupForm(ModelForm):
     class Meta:
         model = CustomUser
-        fields = ["email", "password"]
+        fields = ["email", "password", "is_seller"]

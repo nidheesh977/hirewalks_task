@@ -6,6 +6,9 @@
     }
 </style>
     <div class = "container mb-5 mt-5">
+        <div style = "text-align: right">
+            <button class="btn btn-success">Add Product</button>
+        </div>
         {% if products|length %}
             <div class="cart-container">
                 <table class="table" style = "overflow-y: auto;">
@@ -16,25 +19,27 @@
                             <th scope="col">Price</th>
                             <th scope="col">Quantity</th>
                             <th scope="col">Buyers</th>
+                            <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for product in products %}
                             <tr>
                                 <td>
-                                    <img class = "cart-img" src = "https://imgs.search.brave.com/maAzkwknzC3jKd67IU5PP0dgxZqTs0Omw7c5mzVJcYU/rs:fit:500:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMTcy/ODUwMDc4L2ZyL3Bo/b3RvL3Qtc2hpcnQt/bm9pci5qcGc_cz02/MTJ4NjEyJnc9MCZr/PTIwJmM9OWc5Q1VZ/RTlUeTYxLWtVWGM1/WTZya2dHSk1LcnpY/akZHUDRhODJwdDZu/ST0" />
+                                    <img class = "cart-img" src = "{{product.colors.all.first.main_image.image.url}}" />
                                 </td>
                                 <td>{{product.title}}</td>
                                 <td>₹ {{product.price}}</td>
                                 <td>{{product.count}}</td>
                                 <td>{{product.orders_set.all|length}}</td>
+                                <td><a href = "{% url 'seller:buyers_list' product.id %}" class="btn btn-sm btn-success">Buyers</a></td>
                             </tr>
                         {% endfor %}
                     </tbody>
                 </table>
             </div>
         {% else %}
-            <h3 class = "text-secondary text-center">No products</h3>
+            <h3 class = "text-secondary text-center">No products added yet</h3>
         {% endif %}
     </div>
 {% endblock content %}

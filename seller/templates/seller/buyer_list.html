@@ -1,0 +1,42 @@
+{% extends "products/base.html" %}
+{% block content %}
+<style>
+    td{
+        white-space: nowrap;
+    }
+</style>
+    <div class = "container mb-5 mt-5">
+        {% if buyers|length %}
+            <div class="cart-container">
+                <table class="table" style = "overflow-y: auto;">
+                    <thead>
+                        <tr>
+                            <th scope="col">Buyer</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Total price</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Status</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for buyer in buyers %}
+                            <tr>
+                                <td>{{buyer.buyer.email}}</td>
+                                <td>₹ {{buyer.product.price}}</td>
+                                <td>{{buyer.count}}</td>
+                                <td>₹ {{buyer.price}}</td>
+                                <td>{{buyer.date|date:"d-M-Y"}}</td>
+                                <td>{{buyer.status}}</td>
+                                <td><button class="btn btn-sm btn-success mx-1">Change Status</button><button class="btn btn-sm btn-warning">View Address</button></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <h3 class = "text-secondary text-center">No buyers yet</h3>
+        {% endif %}
+    </div>
+{% endblock content %}

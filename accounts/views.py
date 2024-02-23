@@ -41,6 +41,7 @@ class SignupView(View):
             print(form.cleaned_data)
             user = CustomUser.objects.create(
                 email = form.cleaned_data["email"],
+                is_seller = form.cleaned_data["is_seller"]
             )
             user.set_password(request.POST['password'])
             user.save()

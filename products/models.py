@@ -1,5 +1,6 @@
 from django.db import models
 from colorfield.fields import ColorField
+from accounts.models import CustomUser
 
 # Create your models here.
     
@@ -35,6 +36,16 @@ class Product(models.Model):
     colors = models.ManyToManyField(Color)
     specifications = models.ManyToManyField(Specification, blank = True)
     color_required = models.BooleanField(default = True)
+    seller = models.ForeignKey(CustomUser, on_delete = models.CASCADE)
+
+    @property
+    def count(self):
+        all_colors = self.colors.all()
+        total_count = 0
+        for color in all_colors:
+            total_count+=color.count
+
+        return total_count
 
     def __str__(self):
         return self.title

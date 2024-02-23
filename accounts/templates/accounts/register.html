@@ -17,19 +17,22 @@
                             </ul>
                         {% endif %}
                     </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+                    <div class="col-sm-10">
+                        <input class="form-control" required="" type="password" id = "password" name="password" placeholder="Password" minlength="8">
+                            {% if form.password.errors %}
+                                <ul class="errorlist">
+                                    {% for error in form.password.errors %}
+                                        <div class = "error-msg">{{error}}</div>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
                     </div>
-                    <div class="mb-3 row">
-                        <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
-                        <div class="col-sm-10">
-                            <input class="form-control" required="" type="password" id = "password" name="password" placeholder="Password" minlength="8">
-                              {% if form.password.errors %}
-                                  <ul class="errorlist">
-                                      {% for error in form.password.errors %}
-                                          <div class = "error-msg">{{error}}</div>
-                                      {% endfor %}
-                                  </ul>
-                              {% endif %}
-                        </div>
+                </div>
+                <div class="mb-3 row">
+                    <label for="is_seller"><input type="checkbox" name="is_seller" id="is_seller"> Register as seller</label>
                 </div>
                 <p class = "mb-4">Already have an account? <a href = "{% url 'accounts:login' %}">Login</a></p>
                 <div class = "text-center">

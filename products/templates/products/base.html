@@ -24,6 +24,11 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="{% url 'orders:orders_list' %}">Orders</a>
                     </li>
+                    {% if request.user.is_seller %}
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="{% url 'seller:seller_products' %}">My products</a>
+                        </li>
+                    {% endif %}
                 </ul>
                 {% if request.user.email %}
                     <div class = "d-flex align-items-center">
